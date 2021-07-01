@@ -16,7 +16,9 @@ function App() {
   useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
       .then((res) => res.json())
-      .then((data) => setTemplates(data.data.memes.filter((meme) => meme.box_count <= 2)));
+      .then((data) =>
+        setTemplates(data.data.memes.filter((meme) => meme.box_count <= 2))
+      );
   }, []);
 
   const backToStart = () => {
@@ -27,7 +29,7 @@ function App() {
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign:"center", backgroundColor:"grey" }}>
       {/* Show meme they made */}
       {finMeme && (
         <>
@@ -65,7 +67,7 @@ function App() {
               setFinMeme(data.data.url);
             }}
           >
-            <Meme stylePass={{width: 350}} template={meme} />
+            <Meme stylePass={{ width: 350 }} template={meme} />
 
             <input
               type="text"
@@ -88,9 +90,15 @@ function App() {
       {!meme && (
         <>
           <h1>Pick a Template</h1>
-          {templates.map((template) => (
-            <Meme stylePass={{cursor: "pointer", width: 200}} template={template} onClick={() => setMeme(template)} />
-          ))}
+          <div style={{display:"flex", justifyContent:"space-evenly", alignItems:"center", flexDirection:"row", flexWrap:"wrap"}}>
+            {templates.map((template) => (
+              <Meme
+                stylePass={{ cursor: "pointer", width: 200 }}
+                template={template}
+                onClick={() => setMeme(template)}
+              />
+            ))}
+          </div>
         </>
       )}
       ;

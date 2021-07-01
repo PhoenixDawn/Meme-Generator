@@ -16,7 +16,7 @@ function App() {
   useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
       .then((res) => res.json())
-      .then((data) => setTemplates(data.data.memes));
+      .then((data) => setTemplates(data.data.memes.filter((meme) => meme.box_count <= 2)));
   }, []);
 
   const backToStart = () => {
